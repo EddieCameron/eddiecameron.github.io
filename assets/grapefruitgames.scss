@@ -1,0 +1,52 @@
+---
+---
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+body, wrapper {
+    min-height:100vh;
+    padding-top: 50px;
+ }
+
+.navbar {
+    background-color: #BBCF78;
+    color: #FCF3D2;
+}
+.navbar .navbar-brand {
+    color: #fff;
+}
+
+.navbar > a {
+    color: #fff;
+}
+.navbar > a:hover {
+    color:rgb(221, 233, 180);
+}
+
+#titleText {
+    background-color: #BBCF78;
+    color: #FCF3D2;
+    position: fixed;
+}
+
+#triangles {
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+$primary: #8DC7B8;
+$secondary: #DC574E;
+$info: #BBCF78;
+$headings-color: #DC574E;
+$body-bg: #FCF3D2;
+$body-color: #8DC7B8;
+$font-family-sans-serif: "Nunito",-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+a {
+    color:#ED9355;
+}
+
+a:hover {
+   color:#DC574E;
+}
