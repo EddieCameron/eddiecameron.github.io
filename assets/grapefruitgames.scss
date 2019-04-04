@@ -41,7 +41,7 @@ $body-bg: #FCF3D2;
 $body-color: #8DC7B8;
 $font-family-sans-serif: "Nunito",-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "bootstrap/scss/bootstrap.scss";
 
 a {
     color:#ED9355;
