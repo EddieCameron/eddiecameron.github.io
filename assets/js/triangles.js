@@ -35,9 +35,9 @@ function init() {
   var colors = new THREE.InstancedBufferAttribute(new Float32Array(instances * 4), 4, 1);
   for (var i = 0, ul = colors.count; i < ul; i++) {
     colors.setXYZW(i,
-      0.73,
-      0.81,
-      0.47,
+      252.0 / 255.0,
+      243.0 / 255.0,
+      210.0 / 255.0,
       0.3 + 0.5 * Math.random()
     );
   }
@@ -71,7 +71,7 @@ function init() {
   triangles = document.getElementById("triangles");
   renderer = new THREE.WebGLRenderer();
   renderer.setSize($(triangles).width(), $(triangles).height());
-  renderer.setClearColor("#FCF3D2")
+  renderer.setClearColor("#BBCF78")
 
   triangles.appendChild(renderer.domElement);
 
