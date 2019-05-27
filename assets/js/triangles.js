@@ -99,7 +99,7 @@ function onDocumentMouseMove(event) {
   mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
   var delta = mouse.sub(lastMouse);
-  console.log(delta);
+  //console.log(delta);
   tmpQ.set(moveQ.x * delta.x * 0.2, moveQ.y * delta.y * 0.2, 0, 1).normalize();
 
   for (var i = 0, ul = orientations.count; i < ul; i++) {
