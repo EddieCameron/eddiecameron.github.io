@@ -1,0 +1,43 @@
+---
+layout: default
+title: other
+---
+
+<nav class="navbar fixed-top navbar-expand navbar-dark" role="navigation">
+    <a class="navbar-brand" href="/">eddie cameron</a>
+    <a class="px-4" href="/games">games</a>
+    <a class="px-4" href="/other">other</a>
+  </nav>
+
+<div id="triangles" class="container-fluid px-0" style="position: fixed">
+</div>
+
+<div class="container">
+  <div class="card-deck mt-4">
+      <div class="card mb-4 bg-light border-0">
+        <a href="http://voices.grapefruitgames.com"><img class="card-img-top img-fluid" title="advanced voices"
+            src="/assets/images/voices.png" alt="" /></a>
+        <div class="card-body d-flex justify-content-end flex-column">
+          <h3 class="card-title">voices</h3>
+          <p class="card-text">twitter alt-client</p>
+          <a href="http://voices.grapefruitgames.com" class="card-link">online</a>
+        </div>
+      </div>
+
+    <div class="card mb-4 bg-light border-0">
+      <img class="card-img-top img-fluid" title="videodrone" src="{{ "/assets/images/videodrone.png" | relative_url }}" alt="" />
+      <div class="card-body d-flex justify-content-end flex-column">
+        <h3 class="card-title">videodrone</h3>
+        <p class="card-text">twitter media jukebox</p>
+        <p class="card-text">play the shuffled media from a timeline</p>
+      </div>
+    </div>
+  </div>
+</div><!-- /.container -->
+
+{% include footer.html %}
+
+<script src="{{ "/assets/js/three.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceVert.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceFrag.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/triangles.js" | relative_url }}"></script>
