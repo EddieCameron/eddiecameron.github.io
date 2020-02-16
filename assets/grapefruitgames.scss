@@ -31,6 +31,7 @@ body, wrapper {
 #triangles {
     min-height: 100vh;
     min-width: 100vh;
+    z-index: -1;
 }
 
 $primary: #8DC7B8;

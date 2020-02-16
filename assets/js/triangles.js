@@ -3,7 +3,12 @@ var geometry, material, mesh;
 
 var lastMouse = new THREE.Vector2(), INTERSECTED;
 var mouse = new THREE.Vector2(), INTERSECTED;
+var clock = new THREE.Clock();
 var orientations;
+
+var moveQ = new THREE.Quaternion(500, 500, 500, 0.0);
+var tmpQ = new THREE.Quaternion();
+var currentQ = new THREE.Quaternion();
 
 init();
 animate();
@@ -78,29 +83,14 @@ function init() {
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 }
 
+
 function animate() {
   requestAnimationFrame(animate);
-  render();
-}
 
-function render() {
-  renderer.render(scene, camera);
-}
-
-var moveQ = (new THREE.Quaternion(.5, .5, .5, 0.0)).normalize();
-var tmpQ = new THREE.Quaternion();
-var currentQ = new THREE.Quaternion();
-function onDocumentMouseMove(event) {
-  event.preventDefault();
-
-  lastMouse.x = mouse.x;
-  lastMouse.y = mouse.y;
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-  var delta = mouse.sub(lastMouse);
-  //console.log(delta);
-  tmpQ.set(moveQ.x * delta.x * 0.2, moveQ.y * delta.y * 0.2, 0, 1).normalize();
+  var deltaTime = clock.getDelta();
+  var delta = new THREE.Vector2()
+  delta.subVectors( mouse, lastMouse );
+  tmpQ.set(moveQ.x * deltaTime * delta.x * 0.2, moveQ.y * deltaTime * delta.y * 0.2, 0, 1).normalize();
 
   for (var i = 0, ul = orientations.count; i < ul; i++) {
     var index = i * 4;
@@ -109,4 +99,19 @@ function onDocumentMouseMove(event) {
     orientations.setXYZW(i, currentQ.x, currentQ.y, currentQ.z, currentQ.w);
   }
   orientations.needsUpdate = true;
+
+  lastMouse.x = mouse.x;
+  lastMouse.y = mouse.y;
+
+  render();
+}
+
+function render() {
+  renderer.render(scene, camera);
+}
+function onDocumentMouseMove(event) {
+  event.preventDefault();
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 }

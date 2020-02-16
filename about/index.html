@@ -1,0 +1,32 @@
+---
+layout: default
+title: about
+---
+
+<nav class="navbar fixed-top navbar-expand navbar-dark" role="navigation">
+    <a class="navbar-brand" href="/">eddie cameron</a>
+    <a class="active px-4" href="#">about</a>
+    <a class="px-4" href="/games">games</a>
+    <a class="px-4" href="/other">other</a>
+  </nav>
+
+<div id="triangles" class="container-fluid px-0" style="position: fixed">
+</div>
+
+<div class="container">
+  <div class="bg-light my-3 p-3 rounded">
+    <p>hello</p>
+    <p>i make video games and toys on my own and with others</p>
+    <p>i use unity, swift/xcode, and sometimes web stuff</p>
+    <br>
+    <p>do you want to work together? get in touch to see examples of client work</p>
+    <p><a href="mailto:eddie@eddiecameron.fun">email</a></p>
+  </div>
+</div><!-- /.container -->
+
+{% include footer.html %}
+
+<script src="{{ "/assets/js/three.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceVert.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceFrag.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/triangles.js" | relative_url }}"></script>
