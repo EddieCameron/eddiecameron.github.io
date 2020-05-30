@@ -7,10 +7,14 @@ function addRandomGif(gifs) {
     var posy = Math.random() * (gifcontainer.offsetHeight )
 
     const gifelement = new Image();
+
+    gifelement.onload = function() {
+        gifelement.style.left = ( posx - this.width * 0.5 ) + "px";
+        gifelement.style.top = ( posy - this.height * 0.5 ) + "px";
+    }
+    
     gifelement.src = gif.url;
     gifelement.className = "gif"
-    gifelement.style.left = posx + "px";
-    gifelement.style.top = posy + "px";
     gifcontainer.appendChild(gifelement);
 
     setTimeout(() => {
@@ -24,6 +28,6 @@ function addRandomGif(gifs) {
         const gifs = await giffetch.json();
         setInterval(() => {
             addRandomGif(gifs);
-        }, 500);
+        }, 250);
     }
 }());
