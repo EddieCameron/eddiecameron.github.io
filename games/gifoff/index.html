@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<style>
+    .gif {
+        position: absolute;
+        z-index: -1;
+    }
+</style>
+
+<div class="position-absolute container-fluid vh-100" style="z-index: -1" id="gifholder">
+    test
+</div>
+
+<div class="container bg-light p-5">
+    <h1>🦜 Gif Off! 🎉</h1>
+    <p></p>
+    <a href="https://slack.com/oauth/v2/authorize?client_id=585176480932.1138555581570&scope=commands,chat:write,chat:write.public"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+    <p></p>
+    <p class="lead">Describe gifs (poorly) with your friends! </p>
+    <p>Each round, one player (the <strong>Prompter</strong>) writes a short prompt to describe one of their gifs. Everyone else chooses a gif from their own hand that best matches the prompt, and then tries to guess which gif came from the prompter.</p>
+    <h3>How To Play</h3>
+    <ul>
+        <li>Type <code>/gifoff</code> to start or continue a game in that channel (type at anytime if you need a hint)</li>
+        <li>Click <code>Next Turn</code> to start a new round with a random prompter</li>
+        <li>The prompter will get a <code>Choose Gif</code> button, or they can pass or nominate a different prompter. To choose, write a short prompt, and a gif that goes with it. Prompts should be neither too specific or too obscure, you want only <em>some</em> players to pick your gif out of the lineup. Some examples: "Help! The grocery store is out of quinoa!" / "logging on to twitter"</li>
+        <li>Once the prompter has chosen, everyone else has 10 minutes to choose a gif from their own hand that also matches the prompt. Their goal is to trick the other players into thinking that their gif came from the prompter</li>
+        <li>After 10 minutes, it's time to vote!</li>
+        <li>Anyone who chose a gif should click <code>Vote</code> to see all the chosen gifs, and vote for which one they think came from the prompter</li>
+        <li>Once the votes are in (or 10 minutes pass), all will be revealed, and the <em>very</em> important scores are tallied.</li>
+        <ul>
+        <li> If everyone voted for the prompters gif (it was too obvious!) or no one does (it was too obscure!) then everyone except the prompter gets <strong>2 points</strong></li>
+        <li> Otherwise, the prompter & everyone who voted correctly gets <strong>3 points</strong></li>
+        <li> As a bonus, everyone else gets <strong>1 point</strong> for each player they fooled with their gif</li>
+        </ul>
+        <li>Repeat ad nauseam </li>
+    </ul>
+</div>
+
+<script src="{{ "/assets/js/gifpicker.js" | relative_url }}"></script>
