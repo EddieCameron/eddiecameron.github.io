@@ -64,8 +64,10 @@ function fillTitleText(titleText) {
     // indices to add nodes
     var lineIdx = linesBeforeFirstInsert
     for (const insert of specialWords) {
-        console.log( "inserting line of length " + insert.text.length )
-        var lineInsert = getRandomInt(0, charsPerLine - insert.text.length)
+        console.log("inserting line of length " + insert.text.length)
+
+        var buffer = Math.min( Math.round( 0.2 * charsPerLine ), Math.round( ( charsPerLine - insert.text.length ) * .5 ) )        
+        var lineInsert = getRandomInt( buffer, charsPerLine - insert.text.length - buffer )
         console.log( "at " + lineInsert )
 
         charsBeforeInserts.push(lineInsert)
