@@ -1,12 +1,3 @@
-$( function() {
-    fillTitleText( $( "#titleText>p" ) );
-} );
-
-var minLinesToName = 3;
-var maxLinesToName = 3;
-var minLinesToDesc = 1;
-var maxLinesToDesc = 3;
-
 var specialWords = [
     { text: "eddie cameron" },
     { text: "i make games with a computer" },
@@ -17,105 +8,103 @@ var specialWords = [
     { text: "github", link: "https://github.com/EddieCameron" }
 ];
 
+var totalLines = 50
 var charsPerLine;
 var linesToAvoid = [];
 var nameLineIdx, descLineIdx, totalLines;
 
-function fillTitleText( titleText ) {
-    // find width of line in chars
-    titleText.text( getGarbageChars( 1 ) );
-    var titleHeight = titleText.height();
-    for ( charsPerLine = 2; charsPerLine < 1000; charsPerLine++ ) {
-        titleText.text( titleText.text() + getGarbageChars( 1 ) );
-        if ( titleText.height() > titleHeight )
+var linesBeforeFirstInsert = 2
+var linesBetweenInserts = 1
+
+var lineGarbage = ""
+var charsBeforeInserts = []
+
+function updateCharactersPerLine( element ) {
+    element.textContent = "a"
+    
+    var titleHeight = element.clientHeight;
+    console.log(titleHeight);
+
+    for (charsPerLine = 1; charsPerLine < 1000; charsPerLine++) {
+        element.appendChild(document.createTextNode(getGarbageChars(1)))
+        console.log( element.clientHeight);
+        if ( element.clientHeight > titleHeight )
             break; // must have wrapped
     }
-    console.log( charsPerLine );
-        
-    // line template
-    var line = $( "<span></span>" );
-    line.text(getGarbageChars(charsPerLine));
-    line.append( "<br/>" );
+    console.log(charsPerLine);
+}
 
-    titleText.text( "" );
-
-    // lines to name
-    var linesToName = getRandomInt(minLinesToName, maxLinesToName) - 1;
-    for ( var i = 0; i < linesToName; i++ )
-        line.clone().text(getGarbageChars(charsPerLine)).append("<br/>").appendTo(titleText);
-    
-    var lineIdx = linesToName;
-    for (let i = 0; i < specialWords.length; i++) {
-        const specialWord = specialWords[i];
-        
-        var charsBeforeWord;
-        if (i == 0)
-            charsBeforeWord = getRandomInt(8, charsPerLine - specialWord.text.length - 28);
-        else if (i == 1)
-            charsBeforeWord = getRandomInt(28, charsPerLine - specialWord.text.length - 28);
-        else
-            charsBeforeWord = getRandomInt(8, charsPerLine - specialWord.text.length - 8);
-            
-        linesToAvoid.push(lineIdx);
-        lineIdx++;
-
-        var nameLine = $("<span></span>");
-        nameLine.text(getGarbageChars(charsBeforeWord));  // prefix
-
-        if (specialWord.link == null)
-            nameLine.append("<span style='color: #DC574E'>" + specialWord.text + "</span>");    // word
-        else
-            nameLine.append("<a href=" + specialWord.link + ">" + specialWord.text + "</a>");    // link
-            
-        nameLine.append(line.clone().text( getGarbageChars(charsPerLine - charsBeforeWord - specialWord.text.length)));
-        nameLine.append("<br/>");
-
-        nameLine.appendTo(titleText);
-
-        // append lines afterwards
-        var postLines = getRandomInt(minLinesToDesc, maxLinesToDesc);
-        for (let postLine = 0; postLine < postLines; postLine++)
-            line.clone().text(getGarbageChars(charsPerLine)).append("<br/>").appendTo(titleText);
-        lineIdx += postLines;
+function insertIntoText(element, elementToInsert, idx) {
+    var charCount = 0
+    var n, walk=document.createTreeWalker(element,NodeFilter.SHOW_TEXT,null,false);
+    while (n = walk.nextNode()) {
+        if (charCount + n.length > idx) {
+            if (n.parentNode.tagName != 'A') {
+                var splitAt = idx - charCount
+                const postlinknode = n.splitText(splitAt)
+                element.insertBefore(elementToInsert, postlinknode)
+            }
+            return
+        }
+        else {
+            charCount += n.length
+        }
     }
+}
 
-    // text to end of page
-    var pageHeight = $(document).height;
-    var extraLines = 0;
-    for ( var extraLines = 0; extraLines < 100; extraLines++ ) {
-        line.clone().text( getGarbageChars( charsPerLine ) ).append("<br/>").appendTo( titleText );
-        if ( titleText.height > pageHeight )
-            break;
-    }
-    totalLines = lineIdx + extraLines;
+function fillTitleText(titleText) {
+    // find width of line in chars
+    updateCharactersPerLine( titleText );
+
+    // create garbage
+    lineGarbage = getGarbageChars( charsPerLine * totalLines )
     
-    // disable wrap
-    titleText.css( "white-space", "nowrap" );
+    titleText.textContent = lineGarbage;
+
+    // indices to add nodes
+    var lineIdx = linesBeforeFirstInsert
+    for (const insert of specialWords) {
+        console.log( "inserting line of length " + insert.text.length )
+        var lineInsert = getRandomInt(0, charsPerLine - insert.text.length)
+        console.log( "at " + lineInsert )
+
+        charsBeforeInserts.push(lineInsert)
+        const insertElement = document.createElement('a')
+        insertElement.href = insert.link
+        insertElement.textContent = insert.text
+        const insertCharIdx = lineIdx * charsPerLine + lineInsert
+        insertIntoText(titleText, insertElement, insertCharIdx)
+        
+        lineIdx++
+        lineIdx += linesBetweenInserts
+    }
     
     // add char scrambler...later
     setInterval(swapGarbageCharacter, 2, titleText);
 }
 
 function swapGarbageCharacter( titleText ) {
-    var lineToSwap;
-    var sanityCount = 0;
-    do {
-        sanityCount++;
-        if (sanityCount > 100)
-            return;
-        
-        lineToSwap = getRandomInt(0, totalLines);
-    } while ( linesToAvoid.includes( lineToSwap ) )
+    var charToSwap = getRandomInt(0, lineGarbage.length);
     
-    var charToSwap = getRandomInt(0, charsPerLine);
-
-    var lineElement = titleText.children().eq(lineToSwap);
-    var lineText = lineElement.text();
-
-
-    lineText = lineText.substr(0, charToSwap) + getGarbageChars(1) + lineText.slice(charToSwap + 1);
-    lineElement.text(lineText);
-    lineElement.append( "<br/>")
+    var charCount = 0
+    var n, walk=document.createTreeWalker(titleText,NodeFilter.SHOW_TEXT,null,false);
+    while (n = walk.nextNode()) {
+        if (n.parentNode.tagName == 'A')
+            continue
+        
+        if (charCount + n.length > charToSwap) {
+            if (n.parentNode.tagName != 'A') {
+                var splitAt = charToSwap - charCount
+                let sectionString = n.textContent
+                sectionString = sectionString.substr(0, splitAt) + getGarbageChars(1) + sectionString.substr(splitAt + 1)
+                n.textContent = sectionString
+            }
+            return
+        }
+        else {
+            charCount += n.length
+        }
+    }
 }
 
 function getGarbageChars( count ) {
@@ -126,6 +115,15 @@ function getGarbageChars( count ) {
     return toRet;
 }
 
+function fillLineWithGarbage(lineIdx) {
+    var line = lineContents[lineIdx] ?? ""
+    if (line.length < charsPerLine) {
+        // fill line with garbage
+        line += getGarbageChars( charsPerLine - line.length )
+    }
+    lineContents[lineIdx] = line
+}
+
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
@@ -133,3 +131,5 @@ function getGarbageChars( count ) {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+fillTitleText(document.getElementById( 'titleText' ) );
