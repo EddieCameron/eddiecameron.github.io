@@ -78,3 +78,40 @@ a:hover {
         column-count: 4;
     }
 }
+
+#portfolio {
+    .section {
+        @extend .rounded;
+        @extend .bg-light;
+        @extend .m-3;
+        @extend .p-3;
+    }
+
+    .row {
+        @extend .m-2;
+    }
+
+    .col-md {
+        @extend .px-3;
+        @extend .m-3;
+    }
+
+    .image {
+        @extend .rounded;
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .media {
+        @extend .m-2;
+        @extend .py-2;
+    }
+
+    .media-img {
+        @extend .mr-3;
+        @extend .rounded;
+        width: 9em;
+    }
+}
