@@ -1,7 +1,7 @@
 var specialWords = [
-    { text: "eddie cameron" },
-    { text: "i make games with a computer" },
-    { text: "available for hire" },
+    { text: "eddie cameron", link:"#" },
+    { text: "i make games with a computer", link:"#" },
+    { text: "available for hire", link:"#" },
     { text: "eddie@eddiecameron.fun", link: "mailto:eddie@eddiecameron.fun" },
     { text: "twitter", link: "https://twitter.com/eddiecameron" },
     { text: "itch.io", link: "https://eddiecameron.itch.io" },
