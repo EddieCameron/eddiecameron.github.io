@@ -1,0 +1,29 @@
+---
+layout: default
+title: about
+---
+
+<nav class="navbar fixed-top navbar-expand navbar-dark" role="navigation">
+    <a class="navbar-brand" href="/">eddie cameron</a>
+    <a class="px-4" href="/about">about</a>
+    <a class="px-4" href="/games">games</a>
+    <a class="px-4" href="/other">other</a>
+  </nav>
+
+<div id="triangles" class="container-fluid px-0" style="position: fixed">
+</div>
+
+<div class="container">
+  <div class="bg-light my-3 p-3 rounded">
+    <p>hello</p>
+    <p><a href="./manifest.plist">ipa</a></p>
+    <p>🌈</p>
+  </div>
+</div><!-- /.container -->
+
+{% include footer.html %}
+
+<script src="{{ "/assets/js/three.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceVert.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/eddieInstanceFrag.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/triangles.js" | relative_url }}"></script>
