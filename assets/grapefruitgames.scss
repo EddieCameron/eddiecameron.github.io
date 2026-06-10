@@ -99,8 +99,8 @@ a:hover {
     .image {
         @extend .rounded;
         display: block;
-        height: 100%;
         width: 100%;
+        aspect-ratio: 366/791;
         object-fit: cover;
     }
 

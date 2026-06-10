@@ -25,10 +25,11 @@ function init() {
   var geometry = new THREE.InstancedBufferGeometry();
   geometry.maxInstancedCount = instances; // set so its initalized for dat.GUI, will be set in first draw otherwise
 
+  var scale = .05;
   var vertices = new THREE.BufferAttribute(new Float32Array(triangles * 3 * 3), 3);
-  vertices.setXYZ(0, 0.025 * ( 1 + Math.random() * 3 ), -0.025 * ( 1 + Math.random() * 3 ), 0);
-  vertices.setXYZ(1, -0.025 * ( 1 + Math.random() * 3 ), 0.025 * ( 1 + Math.random() * 3 ), 0);
-  vertices.setXYZ(2, 0, 0, 0.025 * ( 1 + Math.random() * 3 ) );
+  vertices.setXYZ(0, scale, -scale, 0);
+  vertices.setXYZ(1, -scale, -scale, 0);
+  vertices.setXYZ(2, 0, 0, scale );
   geometry.addAttribute('position', vertices);
 
   var offsets = new THREE.InstancedBufferAttribute(new Float32Array(instances * 3), 3, 1);
@@ -43,7 +44,7 @@ function init() {
       252.0 / 255.0,
       243.0 / 255.0,
       210.0 / 255.0,
-      0.3 + 0.5 * Math.random()
+      0.1 + 0.3 * Math.random()
     );
   }
   geometry.addAttribute('color', colors);
