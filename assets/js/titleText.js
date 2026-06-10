@@ -22,15 +22,12 @@ function updateCharactersPerLine( element ) {
     element.textContent = "a"
     
     var titleHeight = element.clientHeight;
-    console.log(titleHeight);
 
     for (charsPerLine = 1; charsPerLine < 1000; charsPerLine++) {
         element.appendChild(document.createTextNode(getGarbageChars(1)))
-        console.log( element.clientHeight);
         if ( element.clientHeight > titleHeight )
             break; // must have wrapped
     }
-    console.log(charsPerLine);
 }
 
 function insertIntoText(element, elementToInsert, idx) {
@@ -63,11 +60,9 @@ function fillTitleText(titleText) {
     // indices to add nodes
     var lineIdx = linesBeforeFirstInsert
     for (const insert of specialWords) {
-        console.log("inserting line of length " + insert.text.length)
 
         var buffer = Math.min( Math.round( 0.2 * charsPerLine ), Math.round( ( charsPerLine - insert.text.length ) * .5 ) )        
         var lineInsert = getRandomInt( buffer, charsPerLine - insert.text.length - buffer )
-        console.log( "at " + lineInsert )
 
         charsBeforeInserts.push(lineInsert)
         const insertElement = document.createElement('a')
